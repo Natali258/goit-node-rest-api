@@ -1,11 +1,5 @@
 import mongoose from "mongoose";
-const DB_HOST =
-  "mongodb+srv://natali:4SF2EiufL0Gt1hYK@cluster0.o47dvcc.mongodb.net/db-contacts?retryWrites=true&w=majority&appName=Cluster0";
-
-mongoose
-  .connect(DB_HOST)
-  .then(() => console.log("Database connection successful"))
-  .catch((error) => console.log("error.message"));
+import "dotenv/config";
 
 import express from "express";
 import morgan from "morgan";
@@ -33,3 +27,18 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
   console.log("Server is running. Use our API on port: 3000");
 });
+
+const DB_HOST =
+  "mongodb+srv://natali:4SF2EiufL0Gt1hYK@cluster0.o47dvcc.mongodb.net/db-contacts?retryWrites=true&w=majority&appName=Cluster0";
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Database connection successful");
+    });
+  })
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
