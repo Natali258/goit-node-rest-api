@@ -7,6 +7,8 @@ import cors from "cors";
 
 import contactsRouter from "./routes/contactsRouter.js";
 
+const { PORT } = process.env;
+
 const app = express();
 
 app.use(morgan("tiny"));
