@@ -3,7 +3,7 @@ import {
   getContactById,
   removeContact,
   addContact,
-  updateContactsById,
+  updateContactById,
 } from "../services/contactsServices.js";
 import { HttpError } from "../helpers/HttpError.js";
 import { ctrlWrapper } from "../helpers/ctrlWrapper.js";

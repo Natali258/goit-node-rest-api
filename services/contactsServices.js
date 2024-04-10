@@ -1,4 +1,4 @@
-import { Contact } from "../contacts/Contact";
+import { Contact } from "../contacts/Contact.js";
 
 export async function listContacts() {
   const contacts = await Contact.find({});
@@ -18,13 +18,13 @@ export async function addContact(data) {
   return newContact;
 }
 
-export const updateContactById = async (id, data) => {
+export async function updateContactById(id, data) {
   const updatedContact = await Contact.findByIdAndUpdate(id, data, {
     new: true,
   });
 
   return updatedContact;
-};
+}
 
 export async function removeContact(id) {
   const deletedContact = await Contact.findByIdAndDelete(id);
