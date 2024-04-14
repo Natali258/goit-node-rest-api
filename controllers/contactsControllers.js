@@ -3,7 +3,7 @@ import {
   getContactById,
   removeContact,
   addContact,
-  updateContactsById,
+  updateContactById,
 } from "../services/contactsServices.js";
 import { HttpError } from "../helpers/HttpError.js";
 import { ctrlWrapper } from "../helpers/ctrlWrapper.js";
@@ -48,7 +48,7 @@ const updateContact = async (req, res) => {
     throw HttpError(400);
   }
 
-  const result = await updateContactsById(id, req.body);
+  const result = await updateContactById(id, req.body);
 
   if (!result) {
     throw HttpError(404);

@@ -6,14 +6,17 @@ import morgan from "morgan";
 import cors from "cors";
 
 import contactsRouter from "./routes/contactsRouter.js";
+import { usersRouter } from "./routes/usersRouter.js";
 
-const { PORT } = process.env;
+const { PORT, DB_HOST } = process.env;
 
 const app = express();
 
 app.use(morgan("tiny"));
 app.use(cors());
 app.use(express.json());
+
+app.use("/api/users", usersRouter);
 
 app.use("/api/contacts", contactsRouter);
 
@@ -29,9 +32,6 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
   console.log("Server is running. Use our API on port: 3000");
 });
-
-const DB_HOST =
-  "mongodb+srv://natali:4SF2EiufL0Gt1hYK@cluster0.o47dvcc.mongodb.net/db-contacts?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose
   .connect(DB_HOST)
