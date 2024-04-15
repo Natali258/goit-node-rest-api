@@ -2,6 +2,7 @@ import express from "express";
 
 import { validateBody } from "../helpers/validateBody.js";
 import { authenticate } from "../helpers/authenticate.js";
+import download from "../helpers/download.js";
 import {
   signinUserSchema,
   signupUserSchema,
@@ -9,8 +10,14 @@ import {
 } from "../schemas/usersSchemas.js";
 import usersControllers from "../controllers/usersControllers.js";
 
-const { register, login, getCurrent, logout, updateSubscription } =
-  usersControllers;
+const {
+  register,
+  login,
+  getCurrent,
+  logout,
+  updateSubscription,
+  updateAvatar,
+} = usersControllers;
 
 export const usersRouter = express.Router();
 
@@ -27,4 +34,11 @@ usersRouter.patch(
   authenticate,
   validateBody(updateSubscriptionSchema),
   updateSubscription
+);
+
+usersRouter.patch(
+  "/avatars",
+  authenticate,
+  download.single("avatar"),
+  updateAvatar
 );

@@ -1,24 +1,25 @@
 import bcrypt from "bcrypt";
+import gravatar from "gravatar";
 
 import { User } from "../users/Users.js";
 
-export async function searchUser(filter) {
+export const searchUser = (filter) => {
   return User.findOne(filter);
-}
+};
 
-export async function createUser(data) {
-  const salt = await bcrypt.genSalt(11);
+export const createUser = async (data) => {
   const hashPassword = await bcrypt.hash(data.password, salt);
+  const avatarURL = gravatar.url(data.email);
 
-  const newUser = User.create({ ...data, password: hashPassword });
+  const newUser = User.create({ ...data, password: hashPassword, avatarURL });
 
   return newUser;
-}
+};
 
-export async function updateUser(id, data) {
+export const updateUser = (id, data) => {
   return User.findByIdAndUpdate(id, data, { new: true });
-}
+};
 
-export async function validatePassword(password, hashPassword) {
+export const validatePassword = (password, hashPassword) => {
   return bcrypt.compare(password, hashPassword);
-}
+};
