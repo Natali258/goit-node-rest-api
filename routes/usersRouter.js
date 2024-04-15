@@ -2,7 +2,7 @@ import express from "express";
 
 import { validateBody } from "../helpers/validateBody.js";
 import { authenticate } from "../helpers/authenticate.js";
-import download from "../helpers/download.js";
+import { download } from "../helpers/download.js";
 import {
   signinUserSchema,
   signupUserSchema,

@@ -8,7 +8,7 @@ export const searchUser = (filter) => {
 };
 
 export const createUser = async (data) => {
-  const hashPassword = await bcrypt.hash(data.password, salt);
+  const hashPassword = await bcrypt.hash(data.password, 5);
   const avatarURL = gravatar.url(data.email);
 
   const newUser = User.create({ ...data, password: hashPassword, avatarURL });

@@ -12,6 +12,7 @@ import {
   validatePassword,
   updateUser,
 } from "../services/usersServices.js";
+import { log } from "console";
 
 const { JWT_SECRET } = process.env;
 
