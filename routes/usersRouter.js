@@ -7,6 +7,7 @@ import {
   signinUserSchema,
   signupUserSchema,
   updateSubscriptionSchema,
+  emailSchema,
 } from "../schemas/usersSchemas.js";
 import usersControllers from "../controllers/usersControllers.js";
 
@@ -17,6 +18,8 @@ const {
   logout,
   updateSubscription,
   updateAvatar,
+  verifyEmail,
+  resendVerifyEmail,
 } = usersControllers;
 
 export const usersRouter = express.Router();
@@ -42,3 +45,7 @@ usersRouter.patch(
   download.single("avatar"),
   updateAvatar
 );
+
+usersRouter.get("/verify/:verificationToken", verifyEmail);
+
+usersRouter.post("/verify", validateBody(emailSchema), resendVerifyEmail);
